@@ -1,51 +1,45 @@
 /* Wedding details — date, time, location, map, flanked by mood photos */
 
 .details-scene {
-  width: min(100%, 76rem);
-  margin-inline: auto;
-  padding-block: clamp(2.5rem, 8vh, 5.5rem) clamp(2.25rem, 7vh, 4.5rem);
+  width: calc(100% + 2 * var(--page-gutter));
+  margin-inline: calc(-1 * var(--page-gutter));
+  padding-block: clamp(2rem, 6vh, 4.5rem) clamp(2rem, 6vh, 4rem);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "info info"
-    "photos-left photos-right";
-  align-items: center;
-  column-gap: clamp(0.75rem, 3vw, 1.75rem);
-  row-gap: clamp(1.5rem, 4.5vh, 2.5rem);
+  grid-template-columns: minmax(4.6rem, 0.82fr) minmax(0, 1.5fr) minmax(4.6rem, 0.82fr);
+  grid-template-areas: "photos-left info photos-right";
+  align-items: start;
+  column-gap: 0.4rem;
 }
 
 .details-scene__photos--left {
   grid-area: photos-left;
+  align-items: flex-end;
 }
 
 .details-scene__photos--right {
   grid-area: photos-right;
+  align-items: flex-start;
+  padding-top: 1.35rem;
 }
 
 .wedding-details {
   grid-area: info;
-  width: min(100%, 22rem);
+  width: 100%;
+  max-width: 22rem;
   margin-inline: auto;
+  padding-inline: 0.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: clamp(1.75rem, 5vh, 2.75rem);
+  gap: clamp(1.15rem, 3.4vh, 1.9rem);
 }
 
 .details-scene__photos {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(0.85rem, 2.2vh, 1.25rem);
-}
-
-.details-scene__photos--left {
-  align-items: flex-end;
-}
-
-.details-scene__photos--right {
-  align-items: flex-start;
+  gap: 0.7rem;
+  min-width: 0;
 }
 
 .details-photo-wrap {
@@ -63,11 +57,11 @@
 
 .details-photo {
   margin: 0;
-  width: min(100%, 12.75rem);
+  width: 100%;
   overflow: hidden;
-  border-radius: 0.7rem;
+  border-radius: 0.45rem;
   background: var(--color-champagne);
-  box-shadow: 0 0.4rem 1.25rem rgba(47, 42, 38, 0.06);
+  box-shadow: 0 0.35rem 1rem rgba(47, 42, 38, 0.06);
 }
 
 .details-photo img {
@@ -86,7 +80,7 @@
 }
 
 .details-photo--b {
-  width: min(88%, 11.25rem);
+  width: 88%;
   aspect-ratio: 1 / 1;
 }
 
@@ -95,7 +89,7 @@
 }
 
 .details-photo--c {
-  width: min(90%, 11.5rem);
+  width: 90%;
   aspect-ratio: 1 / 1;
 }
 
@@ -130,7 +124,7 @@
 
 .detail__value {
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 6vw, 2.75rem);
+  font-size: clamp(1.45rem, 6vw, 2.75rem);
   font-weight: var(--fw-regular);
   line-height: var(--lh-tight);
   letter-spacing: 0.02em;
@@ -139,7 +133,7 @@
 
 .detail__venue {
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 5.5vw, 2.35rem);
+  font-size: clamp(1.2rem, 5vw, 2.35rem);
   font-weight: var(--fw-medium);
   line-height: var(--lh-snug);
   letter-spacing: 0.01em;
@@ -166,17 +160,17 @@
 }
 
 .detail--map {
-  padding-top: clamp(0.5rem, 2vh, 1.5rem);
+  padding-top: 0.15rem;
 }
 
 .map-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.75rem;
+  min-height: 2.4rem;
   padding-inline: 0.15em;
   font-family: var(--font-body);
-  font-size: var(--fs-sm);
+  font-size: clamp(0.68rem, 2.6vw, var(--fs-sm));
   font-weight: var(--fw-medium);
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -228,10 +222,16 @@
 
 @media (min-width: 860px) {
   .details-scene {
+    width: min(100%, 76rem);
+    margin-inline: auto;
+    padding-block: clamp(2.5rem, 8vh, 5.5rem) clamp(2.25rem, 7vh, 4.5rem);
     grid-template-columns: minmax(13rem, 1fr) minmax(16rem, 22rem) minmax(13rem, 1fr);
-    grid-template-areas: "photos-left info photos-right";
     column-gap: clamp(1.1rem, 3.6vw, 2.75rem);
-    align-items: start;
+  }
+
+  .wedding-details {
+    padding-inline: 0;
+    gap: clamp(1.75rem, 5vh, 2.75rem);
   }
 
   .details-scene__photos {
@@ -249,6 +249,7 @@
 
   .details-photo {
     width: min(100%, 16.25rem);
+    border-radius: 0.7rem;
   }
 
   .details-photo--a,
@@ -263,6 +264,15 @@
 
   .detail__address {
     max-width: 24rem;
+  }
+
+  .detail--map {
+    padding-top: clamp(0.5rem, 2vh, 1.5rem);
+  }
+
+  .map-link {
+    min-height: 2.75rem;
+    font-size: var(--fs-sm);
   }
 }
 
