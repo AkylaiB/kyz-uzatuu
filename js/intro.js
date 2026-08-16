@@ -154,6 +154,85 @@
       }
     }
 
+    function scheduleAutoScroll() {
+      if (prefersReducedMotion()) {
+        return;
+      }
+
+      var cancelled = false;
+      var timer = 0;
+
+      function stopListening() {
+        window.removeEventListener("wheel", onUserScroll);
+        window.removeEventListener("touchstart", onUserScroll);
+        window.removeEventListener("pointerdown", onUserScroll);
+        window.removeEventListener("keydown", onKey);
+      }
+
+      function cancelAutoScroll() {
+        if (cancelled) {
+          return;
+        }
+
+        cancelled = true;
+        window.clearTimeout(timer);
+        stopListening();
+      }
+
+      function onUserScroll(event) {
+        if (
+          event.target &&
+          event.target.closest &&
+          event.target.closest(".music-toggle")
+        ) {
+          return;
+        }
+
+        cancelAutoScroll();
+      }
+
+      function onKey(event) {
+        if (
+          event.key === "ArrowDown" ||
+          event.key === "ArrowUp" ||
+          event.key === "PageDown" ||
+          event.key === "PageUp" ||
+          event.key === "Home" ||
+          event.key === "End" ||
+          event.key === " "
+        ) {
+          cancelAutoScroll();
+        }
+      }
+
+      window.addEventListener("wheel", onUserScroll, { passive: true });
+      window.addEventListener("touchstart", onUserScroll, { passive: true });
+      window.addEventListener("pointerdown", onUserScroll, { passive: true });
+      window.addEventListener("keydown", onKey);
+
+      timer = window.setTimeout(function () {
+        if (cancelled) {
+          return;
+        }
+
+        var target = document.querySelector(".details-scene");
+
+        if (!target) {
+          cancelAutoScroll();
+          return;
+        }
+
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 8;
+
+        window.scrollTo({
+          top: Math.max(0, top),
+          behavior: "smooth",
+        });
+
+        stopListening();
+      }, 2800);
+    }
+
     function showInvitation() {
       if (finished) {
         return;
@@ -171,6 +250,7 @@
       trigger.setAttribute("aria-disabled", "true");
       trigger.setAttribute("tabindex", "-1");
       freezeLastFrame();
+      scheduleAutoScroll();
     }
 
     function jumpToEnd(thenShow) {
