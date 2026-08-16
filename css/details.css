@@ -1,33 +1,21 @@
 /* Wedding details — date, time, location, map, flanked by mood photos */
 
 .details-scene {
-  width: calc(100% + 2 * var(--page-gutter));
-  margin-inline: calc(-1 * var(--page-gutter));
+  width: 100%;
+  margin-inline: auto;
   padding-block: clamp(2rem, 6vh, 4.5rem) clamp(2rem, 6vh, 4rem);
   display: grid;
-  grid-template-columns: minmax(4.6rem, 0.82fr) minmax(0, 1.5fr) minmax(4.6rem, 0.82fr);
-  grid-template-areas: "photos-left info photos-right";
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: start;
   column-gap: 0.4rem;
-}
-
-.details-scene__photos--left {
-  grid-area: photos-left;
-  align-items: flex-end;
-}
-
-.details-scene__photos--right {
-  grid-area: photos-right;
-  align-items: flex-start;
-  padding-top: 1.35rem;
+  row-gap: 0.85rem;
 }
 
 .wedding-details {
-  grid-area: info;
+  grid-column: 1 / -1;
   width: 100%;
   max-width: 22rem;
   margin-inline: auto;
-  padding-inline: 0.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,33 +23,46 @@
   gap: clamp(1.15rem, 3.4vh, 1.9rem);
 }
 
-.details-scene__photos {
+.details-ornament {
+  grid-column: 1 / -1;
   display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  min-width: 0;
+  justify-content: center;
+  color: var(--color-champagne-deep);
+  padding-block: 0.15rem 0.35rem;
+}
+
+.details-ornament__svg {
+  display: block;
+  width: min(100%, 22rem);
+  height: auto;
+}
+
+.details-ornament__line,
+.details-ornament__mark {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.15;
+  stroke-linecap: round;
+}
+
+.details-ornament__svg path:not(.details-ornament__line):not(.details-ornament__mark),
+.details-ornament__svg rect,
+.details-ornament__svg circle {
+  fill: currentColor;
 }
 
 .details-photo-wrap {
-  display: flex;
-  width: 100%;
-}
-
-.details-scene__photos--left .details-photo-wrap {
-  justify-content: flex-end;
-}
-
-.details-scene__photos--right .details-photo-wrap {
-  justify-content: flex-start;
+  min-width: 0;
 }
 
 .details-photo {
   margin: 0;
   width: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: 0.45rem;
+  border-radius: 0.4rem;
   background: var(--color-champagne);
-  box-shadow: 0 0.35rem 1rem rgba(47, 42, 38, 0.06);
+  box-shadow: 0 0.3rem 0.9rem rgba(47, 42, 38, 0.06);
 }
 
 .details-photo img {
@@ -71,37 +72,19 @@
   object-fit: cover;
 }
 
-.details-photo--a {
-  aspect-ratio: 3 / 4;
-}
-
-.details-photo--a img {
+.details-photo-wrap--a img {
   object-position: 52% 12%;
 }
 
-.details-photo--b {
-  width: 88%;
-  aspect-ratio: 1 / 1;
-}
-
-.details-photo--b img {
+.details-photo-wrap--b img {
   object-position: 50% 48%;
 }
 
-.details-photo--c {
-  width: 90%;
-  aspect-ratio: 1 / 1;
-}
-
-.details-photo--c img {
+.details-photo-wrap--c img {
   object-position: 48% 46%;
 }
 
-.details-photo--d {
-  aspect-ratio: 3 / 4;
-}
-
-.details-photo--d img {
+.details-photo-wrap--d img {
   object-position: 50% 58%;
 }
 
@@ -223,43 +206,44 @@
 @media (min-width: 860px) {
   .details-scene {
     width: min(100%, 76rem);
-    margin-inline: auto;
-    padding-block: clamp(2.5rem, 8vh, 5.5rem) clamp(2.25rem, 7vh, 4.5rem);
-    grid-template-columns: minmax(13rem, 1fr) minmax(16rem, 22rem) minmax(13rem, 1fr);
+    grid-template-columns: minmax(11rem, 1fr) minmax(16rem, 22rem) minmax(11rem, 1fr);
+    grid-template-areas:
+      "photo-a info photo-c"
+      "photo-b info photo-d"
+      ". ornament .";
     column-gap: clamp(1.1rem, 3.6vw, 2.75rem);
+    row-gap: clamp(1rem, 2.6vh, 1.6rem);
+    align-items: start;
   }
 
   .wedding-details {
-    padding-inline: 0;
+    grid-area: info;
     gap: clamp(1.75rem, 5vh, 2.75rem);
   }
 
-  .details-scene__photos {
-    gap: clamp(1.1rem, 2.8vh, 1.75rem);
-    min-height: 100%;
+  .details-ornament {
+    grid-area: ornament;
+    padding-block: 0.35rem 0;
   }
 
-  .details-scene__photos--left {
-    padding-top: 0.35rem;
+  .details-photo-wrap--a {
+    grid-area: photo-a;
   }
 
-  .details-scene__photos--right {
-    padding-top: 3.25rem;
+  .details-photo-wrap--b {
+    grid-area: photo-b;
+  }
+
+  .details-photo-wrap--c {
+    grid-area: photo-c;
+  }
+
+  .details-photo-wrap--d {
+    grid-area: photo-d;
   }
 
   .details-photo {
-    width: min(100%, 16.25rem);
-    border-radius: 0.7rem;
-  }
-
-  .details-photo--a,
-  .details-photo--d {
-    width: min(100%, 15.75rem);
-  }
-
-  .details-photo--b,
-  .details-photo--c {
-    width: min(86%, 13.75rem);
+    border-radius: 0.55rem;
   }
 
   .detail__address {
