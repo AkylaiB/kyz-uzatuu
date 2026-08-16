@@ -28,6 +28,31 @@
   <body data-scene="intro">
     <a class="skip-link" href="#invitation-names">Перейти к приглашению</a>
 
+    <audio id="intro-music" loop preload="auto" playsinline>
+      <source src="assets/audio/kyz-uzatuu.mp3" type="audio/mpeg" />
+    </audio>
+
+    <button
+      type="button"
+      class="music-toggle"
+      hidden
+      aria-pressed="false"
+      aria-label="Музыка"
+    >
+      <svg class="music-toggle__icon music-toggle__on" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M4.5 9.75v4.5h3.2l3.55 2.85V6.9L7.7 9.75H4.5Zm12.05-1.2a6.3 6.3 0 0 1 0 6.9l-1.15-.85a4.85 4.85 0 0 0 0-5.2l1.15-.85Zm2.2-1.65a8.85 8.85 0 0 1 0 10.2l-1.12-.9a7.4 7.4 0 0 0 0-8.4l1.12-.9Z"
+        />
+      </svg>
+      <svg class="music-toggle__icon music-toggle__off" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M4.5 9.75v4.5h3.2l3.55 2.85V6.9L7.7 9.75H4.5Zm14.2-3.05 1.05 1.05-2.35 2.35 2.35 2.35-1.05 1.05-2.35-2.35-2.35 2.35-1.05-1.05 2.35-2.35-2.35-2.35 1.05-1.05 2.35 2.35 2.35-2.35Z"
+        />
+      </svg>
+    </button>
+
     <section
       id="intro"
       class="intro"

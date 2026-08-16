@@ -3,7 +3,7 @@
 .details-scene {
   width: 100%;
   margin-inline: auto;
-  padding-block: clamp(2rem, 6vh, 4.5rem) clamp(2rem, 6vh, 4rem);
+  padding-block: clamp(2rem, 6vh, 4.5rem) clamp(0.7rem, 2.2vh, 1.35rem);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: start;
@@ -208,7 +208,7 @@
     width: min(100%, 52rem);
     column-gap: 0.65rem;
     row-gap: 1.15rem;
-    padding-block: clamp(2.5rem, 8vh, 5.5rem) clamp(2.25rem, 7vh, 4.5rem);
+    padding-block: clamp(2.5rem, 8vh, 5.5rem) clamp(0.85rem, 2.6vh, 1.6rem);
   }
 
   .wedding-details {

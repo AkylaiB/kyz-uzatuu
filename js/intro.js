@@ -28,6 +28,8 @@
     var text = intro && intro.querySelector(".intro__text");
     var invitation = document.getElementById("invitation");
     var skipLink = document.querySelector(".skip-link");
+    var music = document.getElementById("intro-music");
+    var musicToggle = document.querySelector(".music-toggle");
 
     if (!intro || !trigger || !video || !text || !invitation) {
       return;
@@ -41,6 +43,50 @@
     video.setAttribute("webkit-playsinline", "");
     video.playsInline = true;
     video.muted = true;
+
+    function syncMusicButton() {
+      if (!musicToggle || !music) {
+        return;
+      }
+
+      musicToggle.hidden = false;
+      musicToggle.setAttribute("aria-pressed", music.paused ? "false" : "true");
+      musicToggle.setAttribute(
+        "aria-label",
+        music.paused ? "Включить музыку" : "Выключить музыку"
+      );
+    }
+
+    function startMusic() {
+      if (!music) {
+        return;
+      }
+
+      music.volume = 0.48;
+      var playAttempt = music.play();
+
+      if (playAttempt && typeof playAttempt.catch === "function") {
+        playAttempt.catch(function () {
+          syncMusicButton();
+        });
+      }
+
+      syncMusicButton();
+    }
+
+    if (musicToggle && music) {
+      musicToggle.addEventListener("click", function () {
+        if (music.paused) {
+          startMusic();
+        } else {
+          music.pause();
+          syncMusicButton();
+        }
+      });
+
+      music.addEventListener("play", syncMusicButton);
+      music.addEventListener("pause", syncMusicButton);
+    }
 
     function clearTimers() {
       window.clearInterval(endWatchTimer);
@@ -183,6 +229,7 @@
         return;
       }
 
+      startMusic();
       trigger.disabled = true;
       trigger.setAttribute("aria-disabled", "true");
       document.body.style.overflow = "hidden";
@@ -261,6 +308,7 @@
     if (skipLink) {
       skipLink.addEventListener("click", function (event) {
         event.preventDefault();
+        startMusic();
         jumpToEnd(true);
         text.setAttribute("tabindex", "-1");
         window.requestAnimationFrame(function () {

@@ -208,6 +208,45 @@ body[data-scene="invitation"] {
   }
 }
 
+.music-toggle {
+  position: fixed;
+  right: max(0.9rem, env(safe-area-inset-right));
+  bottom: max(0.9rem, env(safe-area-inset-bottom));
+  z-index: 40;
+  width: 2.7rem;
+  height: 2.7rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(182, 162, 140, 0.38);
+  border-radius: 50%;
+  background: rgba(248, 245, 240, 0.86);
+  color: var(--color-ink);
+  box-shadow: 0 0.28rem 0.85rem rgba(47, 42, 38, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.music-toggle[hidden] {
+  display: none;
+}
+
+.music-toggle__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  display: block;
+}
+
+.music-toggle[aria-pressed="false"] .music-toggle__on,
+.music-toggle[aria-pressed="true"] .music-toggle__off {
+  display: none;
+}
+
+.music-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .intro[data-state="CLOSED"] .intro__prompt {
     animation: none;
