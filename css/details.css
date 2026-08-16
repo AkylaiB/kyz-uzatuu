@@ -205,45 +205,26 @@
 
 @media (min-width: 860px) {
   .details-scene {
-    width: min(100%, 76rem);
-    grid-template-columns: minmax(11rem, 1fr) minmax(16rem, 22rem) minmax(11rem, 1fr);
-    grid-template-areas:
-      "photo-a info photo-c"
-      "photo-b info photo-d"
-      ". ornament .";
-    column-gap: clamp(1.1rem, 3.6vw, 2.75rem);
-    row-gap: clamp(1rem, 2.6vh, 1.6rem);
-    align-items: start;
+    width: min(100%, 52rem);
+    column-gap: 0.65rem;
+    row-gap: 1.15rem;
+    padding-block: clamp(2.5rem, 8vh, 5.5rem) clamp(2.25rem, 7vh, 4.5rem);
   }
 
   .wedding-details {
-    grid-area: info;
     gap: clamp(1.75rem, 5vh, 2.75rem);
   }
 
   .details-ornament {
-    grid-area: ornament;
-    padding-block: 0.35rem 0;
+    padding-block: 0.5rem 0.15rem;
   }
 
-  .details-photo-wrap--a {
-    grid-area: photo-a;
-  }
-
-  .details-photo-wrap--b {
-    grid-area: photo-b;
-  }
-
-  .details-photo-wrap--c {
-    grid-area: photo-c;
-  }
-
-  .details-photo-wrap--d {
-    grid-area: photo-d;
+  .details-ornament__svg {
+    width: min(100%, 28rem);
   }
 
   .details-photo {
-    border-radius: 0.55rem;
+    border-radius: 0.5rem;
   }
 
   .detail__address {
