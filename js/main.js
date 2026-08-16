@@ -20,10 +20,6 @@
     app.initReveal();
   }
 
-  if (typeof app.initGallery === "function") {
-    app.initGallery();
-  }
-
   if (typeof app.initWishes === "function") {
     app.initWishes();
   }

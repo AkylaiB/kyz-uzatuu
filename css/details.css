@@ -1,14 +1,114 @@
-/* Wedding details — date, time, location, map */
+/* Wedding details — date, time, location, map, flanked by mood photos */
+
+.details-scene {
+  width: min(100%, 76rem);
+  margin-inline: auto;
+  padding-block: clamp(2.5rem, 8vh, 5.5rem) clamp(2.25rem, 7vh, 4.5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "info info"
+    "photos-left photos-right";
+  align-items: center;
+  column-gap: clamp(0.75rem, 3vw, 1.75rem);
+  row-gap: clamp(1.5rem, 4.5vh, 2.5rem);
+}
+
+.details-scene__photos--left {
+  grid-area: photos-left;
+}
+
+.details-scene__photos--right {
+  grid-area: photos-right;
+}
 
 .wedding-details {
-  width: min(100%, 28rem);
+  grid-area: info;
+  width: min(100%, 22rem);
   margin-inline: auto;
-  padding-block: clamp(4rem, 12vh, 8rem) clamp(3rem, 8vh, 5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: clamp(4.5rem, 14vh, 8rem);
+  gap: clamp(1.75rem, 5vh, 2.75rem);
+}
+
+.details-scene__photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.85rem, 2.2vh, 1.25rem);
+}
+
+.details-scene__photos--left {
+  align-items: flex-end;
+}
+
+.details-scene__photos--right {
+  align-items: flex-start;
+}
+
+.details-photo-wrap {
+  display: flex;
+  width: 100%;
+}
+
+.details-scene__photos--left .details-photo-wrap {
+  justify-content: flex-end;
+}
+
+.details-scene__photos--right .details-photo-wrap {
+  justify-content: flex-start;
+}
+
+.details-photo {
+  margin: 0;
+  width: min(100%, 12.75rem);
+  overflow: hidden;
+  border-radius: 0.7rem;
+  background: var(--color-champagne);
+  box-shadow: 0 0.4rem 1.25rem rgba(47, 42, 38, 0.06);
+}
+
+.details-photo img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.details-photo--a {
+  aspect-ratio: 3 / 4;
+}
+
+.details-photo--a img {
+  object-position: 52% 12%;
+}
+
+.details-photo--b {
+  width: min(88%, 11.25rem);
+  aspect-ratio: 1 / 1;
+}
+
+.details-photo--b img {
+  object-position: 50% 48%;
+}
+
+.details-photo--c {
+  width: min(90%, 11.5rem);
+  aspect-ratio: 1 / 1;
+}
+
+.details-photo--c img {
+  object-position: 48% 46%;
+}
+
+.details-photo--d {
+  aspect-ratio: 3 / 4;
+}
+
+.details-photo--d img {
+  object-position: 50% 58%;
 }
 
 .detail {
@@ -44,6 +144,15 @@
   line-height: var(--lh-snug);
   letter-spacing: 0.01em;
   color: var(--color-ink);
+}
+
+.detail__place {
+  font-family: var(--font-display);
+  font-size: clamp(1.22rem, 3.8vw, 1.7rem);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
+  letter-spacing: 0.01em;
+  color: #4f4841;
 }
 
 .detail__address {
@@ -117,9 +226,39 @@
   border: 0;
 }
 
-@media (min-width: 640px) {
-  .wedding-details {
-    width: min(100%, 32rem);
+@media (min-width: 860px) {
+  .details-scene {
+    grid-template-columns: minmax(13rem, 1fr) minmax(16rem, 22rem) minmax(13rem, 1fr);
+    grid-template-areas: "photos-left info photos-right";
+    column-gap: clamp(1.1rem, 3.6vw, 2.75rem);
+    align-items: start;
+  }
+
+  .details-scene__photos {
+    gap: clamp(1.1rem, 2.8vh, 1.75rem);
+    min-height: 100%;
+  }
+
+  .details-scene__photos--left {
+    padding-top: 0.35rem;
+  }
+
+  .details-scene__photos--right {
+    padding-top: 3.25rem;
+  }
+
+  .details-photo {
+    width: min(100%, 16.25rem);
+  }
+
+  .details-photo--a,
+  .details-photo--d {
+    width: min(100%, 15.75rem);
+  }
+
+  .details-photo--b,
+  .details-photo--c {
+    width: min(86%, 13.75rem);
   }
 
   .detail__address {
